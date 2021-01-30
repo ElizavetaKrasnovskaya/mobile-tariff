@@ -54,7 +54,7 @@ public class Menu {
                 break;
             case 4:
                 tariffs = service.findTariffByAmountOfUsers(fetchAmountOfUsers());
-                if(!tariffs.equals(null)){
+                if(!tariffs.isEmpty()){
                     for(Tariff tariff : tariffs){
                         System.out.println(tariff);
                     }
