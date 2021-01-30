@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 
 public class TariffService implements Service{
 
-//    private final static Logger LOGGER = LogManager.getLogger(TariffService.class);
-
     public List<Tariff> create(){
         List<Tariff> tariffs = new ArrayList<>();
         tariffs.add(ComfortTariffFactory.getINSTANCE().create(20));
