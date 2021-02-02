@@ -3,10 +3,9 @@ package com.bsuir.labs.mobile.dao;
 import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
 import com.bsuir.labs.mobile.exception.NoTariffException;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable {
+public class User {
 
     private final String surname;
     private final String name;

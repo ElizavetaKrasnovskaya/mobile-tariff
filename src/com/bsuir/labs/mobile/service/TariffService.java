@@ -24,19 +24,16 @@ import java.util.stream.Collectors;
 public class TariffService implements Service {
 
     private User user = null;
-    private Company company = createCompany();
+    private static Company company = createCompany();
 
-    public Company createCompany() {
+    public static Company createCompany() {
         Company company = new Company();
-
         List<Tariff> tariffs = new ArrayList<>();
         tariffs.add(ComfortTariffFactory.getINSTANCE().create(20));
         tariffs.add(Super10TariffFactory.getINSTANCE().create(40));
         tariffs.add(Super25TariffFactory.getINSTANCE().create(100));
         tariffs.add(UnlimitedTariffFactory.getINSTANCE().create(200));
-
         company.setTariffs(tariffs);
-
         return company;
     }
 
