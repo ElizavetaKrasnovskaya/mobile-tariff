@@ -3,14 +3,15 @@ package com.bsuir.labs.mobile.dao;
 import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
 import com.bsuir.labs.mobile.exception.NoTariffException;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
 
     private final String surname;
     private final String name;
     private final String middleName;
-    private static Tariff tariff;
+    private Tariff tariff;
 
     public User(String surname, String name, String middleName) {
         this.surname = surname;
@@ -35,14 +36,14 @@ public class User {
     }
 
     public void subscribe(Tariff tariff) throws AlreadyHasTariffException {
-        if(User.tariff == null){
-            User.tariff = tariff;
+        if(this.tariff == null){
+            this.tariff = tariff;
         }else{
             throw new AlreadyHasTariffException("You are already subscribed to the tariff");
         }
     }
 
-    public void unSubscribe() throws NoTariffException {
+    public void unsubscribe() throws NoTariffException {
         if(!tariff.equals(null)){
             tariff = null;
         }else{

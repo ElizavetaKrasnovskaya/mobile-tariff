@@ -1,9 +1,10 @@
 package com.bsuir.labs.mobile.dao;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public abstract class Tariff {
+public abstract class Tariff implements Serializable {
 
     private final String name;
     private final BigDecimal price;

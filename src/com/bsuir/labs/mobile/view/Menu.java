@@ -96,7 +96,7 @@ public class Menu {
                 }
                 break;
             case 8:
-                System.out.println(user);
+                System.out.println(service.readUserFromFile());
                 break;
             default:
                 System.out.println("There is no cases");

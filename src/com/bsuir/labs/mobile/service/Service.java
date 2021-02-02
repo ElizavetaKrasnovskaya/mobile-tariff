@@ -1,5 +1,6 @@
 package com.bsuir.labs.mobile.service;
 
+import com.bsuir.labs.mobile.dao.Company;
 import com.bsuir.labs.mobile.dao.Tariff;
 import com.bsuir.labs.mobile.dao.User;
 import com.bsuir.labs.mobile.exception.NoTariffException;
@@ -15,4 +16,8 @@ public interface Service {
     List<Tariff> sortTariffs();
     void subscribe(Tariff tariff) throws NoUserException;
     void unsubscribe() throws NoUserException, NoTariffException;
+    void writeUserInFile();
+    void writeCompanyInFile();
+    User readUserFromFile();
+    Company readCompanyFromFile();
 }

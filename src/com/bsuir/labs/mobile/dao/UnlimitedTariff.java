@@ -1,8 +1,9 @@
 package com.bsuir.labs.mobile.dao;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class UnlimitedTariff extends Tariff{
+public class UnlimitedTariff extends Tariff implements Serializable {
 
     private static final String name = "unlimited tariff";
     private static final BigDecimal price = BigDecimal.valueOf(25);
