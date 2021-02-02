@@ -2,6 +2,9 @@ package com.bsuir.labs.mobile.view;
 
 import com.bsuir.labs.mobile.dao.Tariff;
 import com.bsuir.labs.mobile.dao.User;
+import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
+import com.bsuir.labs.mobile.exception.NoTariffException;
+import com.bsuir.labs.mobile.exception.NoUserException;
 import com.bsuir.labs.mobile.service.Service;
 import com.bsuir.labs.mobile.service.TariffService;
 
@@ -79,17 +82,19 @@ public class Menu {
                 user = service.createNewUser(surname, name, middleName);
                 break;
             case 6:
-                if (service.subscribe(fetchTariff())) {
+                try {
+                    service.subscribe(fetchTariff());
                     System.out.println("Successful subscribed!");
-                } else {
-                    System.out.println("Something went wrong...");
+                } catch (NoUserException e) {
+                    e.printStackTrace();
                 }
                 break;
             case 7:
-                if (service.unsubscribe()) {
+                try {
+                    service.unsubscribe();
                     System.out.println("Successful unsubscribed!");
-                } else {
-                    System.out.println("Something went wrong...");
+                } catch (NoUserException | NoTariffException e) {
+                    e.printStackTrace();
                 }
                 break;
             case 8:
@@ -98,6 +103,7 @@ public class Menu {
             default:
                 System.out.println("There is no cases");
         }
+
     }
 
     public static String fetchInfoAboutUser() {

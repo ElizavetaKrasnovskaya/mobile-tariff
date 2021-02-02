@@ -3,6 +3,9 @@ package com.bsuir.labs.mobile.service;
 import com.bsuir.labs.mobile.dao.Company;
 import com.bsuir.labs.mobile.dao.Tariff;
 import com.bsuir.labs.mobile.dao.User;
+import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
+import com.bsuir.labs.mobile.exception.NoTariffException;
+import com.bsuir.labs.mobile.exception.NoUserException;
 import com.bsuir.labs.mobile.fabrica.ComfortTariffFactory;
 import com.bsuir.labs.mobile.fabrica.Super10TariffFactory;
 import com.bsuir.labs.mobile.fabrica.Super25TariffFactory;
@@ -55,7 +58,7 @@ public class TariffService implements Service {
     @Override
     public int amountOfUsers() {
         int amountOfUsers = 0;
-        for(Tariff tariff : company.getTariffs()){
+        for (Tariff tariff : company.getTariffs()) {
             amountOfUsers += tariff.getAmountOfUsers();
         }
         company.setAmountOfUsers(amountOfUsers);
@@ -70,45 +73,46 @@ public class TariffService implements Service {
     }
 
     @Override
-    public boolean subscribe(Tariff tariffToSubscribe) {
-        boolean isSubscribed;
+    public void subscribe(Tariff tariffToSubscribe) throws NoUserException {
         if (this.user != null) {
-
             List<Tariff> tariffs = createCompany().getTariffs();
             for (Tariff tariff : tariffs) {
                 if (tariff.getName().equals(tariffToSubscribe.getName())) {
                     company.getTariffs().remove(tariffToSubscribe);
                     tariff.setAmountOfUsers(tariff.getAmountOfUsers() + 1);
-                    user.subscribe(tariff);
+                    try {
+                        user.subscribe(tariff);
+                    } catch (AlreadyHasTariffException e) {
+                        e.printStackTrace();
+                    }
                     company.getTariffs().add(tariff);
                     break;
                 }
             }
-            isSubscribed = true;
         } else {
-            isSubscribed = false;
+            throw new NoUserException("Create user!");
         }
-        return isSubscribed;
     }
 
     @Override
-    public boolean unsubscribe() {
-        boolean isUnsubscribed;
+    public void unsubscribe() throws NoUserException, NoTariffException {
         if (this.user != null) {
-            List<Tariff> tariffs = company.getTariffs();
-            for (Tariff tariff : tariffs) {
-                if (tariff.getName().equals(user.getTariff().getName())) {
-                    company.getTariffs().remove(tariff);
-                    tariff.setAmountOfUsers(tariff.getAmountOfUsers() - 1);
-                    company.getTariffs().add(tariff);
-                    break;
+            if (this.user.getTariff() != null) {
+                List<Tariff> tariffs = company.getTariffs();
+                for (Tariff tariff : tariffs) {
+                    if (tariff.getName().equals(user.getTariff().getName())) {
+                        company.getTariffs().remove(tariff);
+                        tariff.setAmountOfUsers(tariff.getAmountOfUsers() - 1);
+                        company.getTariffs().add(tariff);
+                        break;
+                    }
                 }
+                user.unSubscribe();
+            } else {
+                throw new NoTariffException("You have no tariff to unsubscribe from");
             }
-            user.unSubscribe();
-            isUnsubscribed = true;
         } else {
-            isUnsubscribed = false;
+            throw new NoUserException("Create user!");
         }
-        return isUnsubscribed;
     }
 }

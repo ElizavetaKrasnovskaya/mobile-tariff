@@ -1,5 +1,8 @@
 package com.bsuir.labs.mobile.dao;
 
+import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
+import com.bsuir.labs.mobile.exception.NoTariffException;
+
 import java.util.Objects;
 
 public class User {
@@ -8,8 +11,6 @@ public class User {
     private String name;
     private String middleName;
     private static Tariff tariff;
-
-    public User() {}
 
     public User(String surname, String name, String middleName) {
         this.surname = surname;
@@ -21,50 +22,32 @@ public class User {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMiddleName() {
         return middleName;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
     public Tariff getTariff() {
         return tariff;
     }
 
-    public boolean subscribe(Tariff tariff){
-        boolean isSubscribed;
+    public void subscribe(Tariff tariff) throws AlreadyHasTariffException {
         if(this.tariff == null){
             this.tariff = tariff;
-            isSubscribed = true;
         }else{
-            isSubscribed = false;
+            throw new AlreadyHasTariffException("You are already subscribed to the tariff");
         }
-        return isSubscribed;
     }
 
-    public boolean unSubscribe(){
-        boolean isUnsubscribe;
-        if(this.tariff != null){
+    public void unSubscribe() throws NoTariffException {
+        if(!this.tariff.equals(null)){
             tariff = null;
-            isUnsubscribe = true;
         }else{
-            isUnsubscribe = false;
+            throw new NoTariffException("You have no tariff to unsubscribe from");
         }
-        return isUnsubscribe;
     }
 
     @Override
