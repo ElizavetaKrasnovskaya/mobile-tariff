@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public class User {
 
-    private String surname;
-    private String name;
-    private String middleName;
+    private final String surname;
+    private final String name;
+    private final String middleName;
     private static Tariff tariff;
 
     public User(String surname, String name, String middleName) {
@@ -35,15 +35,15 @@ public class User {
     }
 
     public void subscribe(Tariff tariff) throws AlreadyHasTariffException {
-        if(this.tariff == null){
-            this.tariff = tariff;
+        if(User.tariff == null){
+            User.tariff = tariff;
         }else{
             throw new AlreadyHasTariffException("You are already subscribed to the tariff");
         }
     }
 
     public void unSubscribe() throws NoTariffException {
-        if(!this.tariff.equals(null)){
+        if(!tariff.equals(null)){
             tariff = null;
         }else{
             throw new NoTariffException("You have no tariff to unsubscribe from");

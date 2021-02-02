@@ -2,7 +2,6 @@ package com.bsuir.labs.mobile.view;
 
 import com.bsuir.labs.mobile.dao.Tariff;
 import com.bsuir.labs.mobile.dao.User;
-import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
 import com.bsuir.labs.mobile.exception.NoTariffException;
 import com.bsuir.labs.mobile.exception.NoUserException;
 import com.bsuir.labs.mobile.service.Service;
@@ -15,7 +14,6 @@ import java.util.regex.Pattern;
 public class Menu {
 
     private final static Service service = new TariffService();
-    private static List<Tariff> tariffs;
     private static User user;
 
     public static void printMenu() {
@@ -48,7 +46,7 @@ public class Menu {
     public static void handleUserInput(int choice) {
         switch (choice) {
             case 1:
-                tariffs = service.findAllTariffs();
+                List<Tariff> tariffs = service.findAllTariffs();
                 for (Tariff tariff : tariffs) {
                     System.out.println(tariff);
                 }
@@ -108,35 +106,29 @@ public class Menu {
 
     public static String fetchInfoAboutUser() {
         String name;
-        while (true) {
+        do {
             Scanner scanner = new Scanner(System.in);
             name = scanner.next();
-            if (Pattern.compile("^[a-zA-Z]*$").matcher(name).matches()) {
-                break;
-            }
-        }
+        } while (!Pattern.compile("^[a-zA-Z]*$").matcher(name).matches());
         return name;
     }
 
     public static int fetchAmountOfUsers() {
         int amountOfUsers = 0;
-        while (true) {
+        do {
             System.out.println("Enter amount of users");
             Scanner scanner = new Scanner(System.in);
             try {
                 amountOfUsers = Integer.parseInt(scanner.next());
             } catch (NumberFormatException ex) {
             }
-            if (amountOfUsers != 0) {
-                break;
-            }
-        }
+        } while (amountOfUsers == 0);
         return amountOfUsers;
     }
 
     public static Tariff fetchTariff() {
-        List<Tariff> tariffs = service.findAllTariffs();
         int choice = 0;
+        List<Tariff> tariffs = service.findAllTariffs();
         while (true) {
             System.out.println("Enter 1, 2, 3, 4 or 5");
             for (int i = 0; i < tariffs.size(); i++) {
@@ -144,14 +136,15 @@ public class Menu {
             }
             System.out.println("5 - exit");
             Scanner scanner = new Scanner(System.in);
-
             try {
                 choice = Integer.parseInt(scanner.next());
-                break;
             } catch (NumberFormatException ex) {
             }
-            if (choice == 5) {
+            if (choice > 0 && choice < 5) {
                 break;
+            }
+            if (choice == 5) {
+                printMenu();
             }
         }
         return tariffs.get(choice - 1);

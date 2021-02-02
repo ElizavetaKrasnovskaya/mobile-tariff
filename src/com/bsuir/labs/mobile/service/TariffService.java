@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class TariffService implements Service {
 
     private User user = null;
-    private Company company = createCompany();
+    private final Company company = createCompany();
 
     public Company createCompany() {
 

@@ -2,7 +2,6 @@ package com.bsuir.labs.mobile.service;
 
 import com.bsuir.labs.mobile.dao.Tariff;
 import com.bsuir.labs.mobile.dao.User;
-import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
 import com.bsuir.labs.mobile.exception.NoTariffException;
 import com.bsuir.labs.mobile.exception.NoUserException;
 
