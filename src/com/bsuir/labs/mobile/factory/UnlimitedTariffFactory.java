@@ -1,15 +1,17 @@
-package com.bsuir.labs.mobile.fabrica;
+package com.bsuir.labs.mobile.factory;
 
 import com.bsuir.labs.mobile.dao.Tariff;
 import com.bsuir.labs.mobile.dao.UnlimitedTariff;
 
-public class UnlimitedTariffFactory implements Factory{
+public class UnlimitedTariffFactory implements Factory {
+
     private static UnlimitedTariffFactory INSTANCE;
 
-    private UnlimitedTariffFactory(){}
+    private UnlimitedTariffFactory() {
+    }
 
     public static UnlimitedTariffFactory getINSTANCE() {
-        if(INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new UnlimitedTariffFactory();
         }
         return INSTANCE;

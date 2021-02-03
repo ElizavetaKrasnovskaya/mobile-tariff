@@ -1,4 +1,4 @@
-package com.bsuir.labs.mobile.fabrica;
+package com.bsuir.labs.mobile.factory;
 
 import com.bsuir.labs.mobile.dao.Tariff;
 

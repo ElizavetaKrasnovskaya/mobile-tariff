@@ -1,15 +1,17 @@
-package com.bsuir.labs.mobile.fabrica;
+package com.bsuir.labs.mobile.factory;
 
 import com.bsuir.labs.mobile.dao.Super25Tariff;
 import com.bsuir.labs.mobile.dao.Tariff;
 
-public class Super25TariffFactory implements Factory{
+public class Super25TariffFactory implements Factory {
+
     private static Super25TariffFactory INSTANCE;
 
-    private Super25TariffFactory(){}
+    private Super25TariffFactory() {
+    }
 
     public static Super25TariffFactory getINSTANCE() {
-        if(INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new Super25TariffFactory();
         }
         return INSTANCE;

@@ -6,10 +6,10 @@ import com.bsuir.labs.mobile.dao.User;
 import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
 import com.bsuir.labs.mobile.exception.NoTariffException;
 import com.bsuir.labs.mobile.exception.NoUserException;
-import com.bsuir.labs.mobile.fabrica.ComfortTariffFactory;
-import com.bsuir.labs.mobile.fabrica.Super10TariffFactory;
-import com.bsuir.labs.mobile.fabrica.Super25TariffFactory;
-import com.bsuir.labs.mobile.fabrica.UnlimitedTariffFactory;
+import com.bsuir.labs.mobile.factory.ComfortTariffFactory;
+import com.bsuir.labs.mobile.factory.Super10TariffFactory;
+import com.bsuir.labs.mobile.factory.Super25TariffFactory;
+import com.bsuir.labs.mobile.factory.UnlimitedTariffFactory;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -122,32 +122,32 @@ public class TariffService implements Service {
         writeUserInFile();
     }
 
-    public void writeUserInFile(){
-        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("user.txt"))){
+    public void writeUserInFile() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("user.txt"))) {
             outputStream.writeObject(user);
-        }catch (IOException exception){
+        } catch (IOException exception) {
         }
     }
 
-    public void writeCompanyInFile(){
-        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("company.txt"))){
+    public void writeCompanyInFile() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("company.txt"))) {
             outputStream.writeObject(createCompany());
-        }catch (IOException exception){
+        } catch (IOException exception) {
         }
     }
 
-    public User readUserFromFile(){
-        try(ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("user.txt"))){
+    public User readUserFromFile() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("user.txt"))) {
             user = (User) inputStream.readObject();
-        }catch (IOException | ClassNotFoundException exception){
+        } catch (IOException | ClassNotFoundException exception) {
         }
         return user;
     }
 
-    public Company readCompanyFromFile(){
-        try(ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("company.txt"))){
+    public Company readCompanyFromFile() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("company.txt"))) {
             company = (Company) inputStream.readObject();
-        }catch (IOException | ClassNotFoundException exception){
+        } catch (IOException | ClassNotFoundException exception) {
         }
         return company;
     }

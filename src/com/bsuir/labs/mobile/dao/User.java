@@ -35,17 +35,17 @@ public class User {
     }
 
     public void subscribe(Tariff tariff) throws AlreadyHasTariffException {
-        if(this.tariff == null){
+        if (this.tariff == null) {
             this.tariff = tariff;
-        }else{
+        } else {
             throw new AlreadyHasTariffException("You are already subscribed to the tariff");
         }
     }
 
     public void unsubscribe() throws NoTariffException {
-        if(!tariff.equals(null)){
+        if (!tariff.equals(null)) {
             tariff = null;
-        }else{
+        } else {
             throw new NoTariffException("You have no tariff to unsubscribe from");
         }
     }

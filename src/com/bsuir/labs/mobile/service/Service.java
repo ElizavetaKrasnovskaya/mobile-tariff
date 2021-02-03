@@ -9,15 +9,26 @@ import com.bsuir.labs.mobile.exception.NoUserException;
 import java.util.List;
 
 public interface Service {
+
     User createNewUser(String surname, String name, String middleName);
+
     List<Tariff> findAllTariffs();
+
     List<Tariff> findTariffByAmountOfUsers(int amount);
+
     int amountOfUsers();
+
     List<Tariff> sortTariffs();
+
     void subscribe(Tariff tariff) throws NoUserException;
+
     void unsubscribe() throws NoUserException, NoTariffException;
+
     void writeUserInFile();
+
     void writeCompanyInFile();
+
     User readUserFromFile();
+
     Company readCompanyFromFile();
 }

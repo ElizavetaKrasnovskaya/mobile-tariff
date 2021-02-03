@@ -1,4 +1,4 @@
-package com.bsuir.labs.mobile.fabrica;
+package com.bsuir.labs.mobile.factory;
 
 import com.bsuir.labs.mobile.dao.ComfortTariff;
 import com.bsuir.labs.mobile.dao.Tariff;
@@ -7,10 +7,11 @@ public class ComfortTariffFactory implements Factory {
 
     private static ComfortTariffFactory INSTANCE = null;
 
-    private ComfortTariffFactory(){}
+    private ComfortTariffFactory() {
+    }
 
     public static ComfortTariffFactory getINSTANCE() {
-        if(INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new ComfortTariffFactory();
         }
         return INSTANCE;
