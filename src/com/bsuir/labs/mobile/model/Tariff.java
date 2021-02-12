@@ -45,9 +45,8 @@ public abstract class Tariff {
 
     @Override
     public String toString() {
-        return "Tariff" +
-                " name = " + name +
-                ", price = " + price +
+        return name + ":" +
+                " price = " + price +
                 ", amountOfUsers = " + amountOfUsers +
                 ", amountOfMinutes = " + amountOfMinutes +
                 ", amountOfMB = " + amountOfInternet;
