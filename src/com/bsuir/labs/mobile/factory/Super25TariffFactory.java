@@ -1,7 +1,7 @@
 package com.bsuir.labs.mobile.factory;
 
-import com.bsuir.labs.mobile.dao.Super25Tariff;
-import com.bsuir.labs.mobile.dao.Tariff;
+import com.bsuir.labs.mobile.model.Super25Tariff;
+import com.bsuir.labs.mobile.model.Tariff;
 
 public class Super25TariffFactory implements Factory {
 

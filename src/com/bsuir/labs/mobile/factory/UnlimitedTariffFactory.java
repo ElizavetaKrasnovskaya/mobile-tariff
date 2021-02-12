@@ -1,7 +1,7 @@
 package com.bsuir.labs.mobile.factory;
 
-import com.bsuir.labs.mobile.dao.Tariff;
-import com.bsuir.labs.mobile.dao.UnlimitedTariff;
+import com.bsuir.labs.mobile.model.Tariff;
+import com.bsuir.labs.mobile.model.UnlimitedTariff;
 
 public class UnlimitedTariffFactory implements Factory {
 

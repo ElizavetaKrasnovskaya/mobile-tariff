@@ -1,4 +1,4 @@
-package com.bsuir.labs.mobile.dao;
+package com.bsuir.labs.mobile.model;
 
 import java.math.BigDecimal;
 

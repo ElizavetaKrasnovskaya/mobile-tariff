@@ -1,4 +1,4 @@
-package com.bsuir.labs.mobile.dao;
+package com.bsuir.labs.mobile.model;
 
 import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
 import com.bsuir.labs.mobile.exception.NoTariffException;

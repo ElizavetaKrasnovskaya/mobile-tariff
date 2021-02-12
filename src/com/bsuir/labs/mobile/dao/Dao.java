@@ -1,15 +1,16 @@
-package com.bsuir.labs.mobile.service;
+package com.bsuir.labs.mobile.dao;
 
 import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
-import com.bsuir.labs.mobile.exception.NoTariffException;
-import com.bsuir.labs.mobile.exception.NoUserException;
 import com.bsuir.labs.mobile.model.Company;
 import com.bsuir.labs.mobile.model.Tariff;
 import com.bsuir.labs.mobile.model.User;
+import com.bsuir.labs.mobile.exception.NoTariffException;
+import com.bsuir.labs.mobile.exception.NoUserException;
 
 import java.util.List;
 
-public interface Service {
+public interface Dao {
+
     User createNewUser(String surname, String name, String middleName);
 
     List<Tariff> findAllTariffs();

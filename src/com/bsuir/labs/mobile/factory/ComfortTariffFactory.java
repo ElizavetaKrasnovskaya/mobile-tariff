@@ -1,7 +1,7 @@
 package com.bsuir.labs.mobile.factory;
 
-import com.bsuir.labs.mobile.dao.ComfortTariff;
-import com.bsuir.labs.mobile.dao.Tariff;
+import com.bsuir.labs.mobile.model.ComfortTariff;
+import com.bsuir.labs.mobile.model.Tariff;
 
 public class ComfortTariffFactory implements Factory {
 

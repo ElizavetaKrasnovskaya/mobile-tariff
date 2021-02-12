@@ -1,9 +1,11 @@
 package com.bsuir.labs.mobile.view;
 
-import com.bsuir.labs.mobile.dao.Tariff;
-import com.bsuir.labs.mobile.dao.User;
+import com.bsuir.labs.mobile.exception.AlreadyHasTariffException;
+import com.bsuir.labs.mobile.model.Tariff;
+import com.bsuir.labs.mobile.model.User;
 import com.bsuir.labs.mobile.exception.NoTariffException;
 import com.bsuir.labs.mobile.exception.NoUserException;
+import com.bsuir.labs.mobile.dao.TariffDao;
 import com.bsuir.labs.mobile.service.Service;
 import com.bsuir.labs.mobile.service.TariffService;
 
@@ -13,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Menu {
 
-    private final static Service service = new TariffService();
+    private final static Service SERVICE = new TariffService();
     private static User user;
 
     public static void printMenu() {
@@ -46,22 +48,22 @@ public class Menu {
     public static void handleUserInput(int choice) {
         switch (choice) {
             case 1:
-                List<Tariff> tariffs = service.findAllTariffs();
+                List<Tariff> tariffs = SERVICE.findAllTariffs();
                 for (Tariff tariff : tariffs) {
                     System.out.println(tariff);
                 }
                 break;
             case 2:
-                System.out.println(service.amountOfUsers());
+                System.out.println(SERVICE.amountOfUsers());
                 break;
             case 3:
-                tariffs = service.sortTariffs();
+                tariffs = SERVICE.sortTariffs();
                 for (Tariff tariff : tariffs) {
                     System.out.println(tariff);
                 }
                 break;
             case 4:
-                tariffs = service.findTariffByAmountOfUsers(fetchAmountOfUsers());
+                tariffs = SERVICE.findTariffByAmountOfUsers(fetchAmountOfUsers());
                 if (!tariffs.isEmpty()) {
                     for (Tariff tariff : tariffs) {
                         System.out.println(tariff);
@@ -77,26 +79,26 @@ public class Menu {
                 String name = fetchInfoAboutUser();
                 System.out.println("Enter middle name");
                 String middleName = fetchInfoAboutUser();
-                user = service.createNewUser(surname, name, middleName);
+                user = SERVICE.createNewUser(surname, name, middleName);
                 break;
             case 6:
                 try {
-                    service.subscribe(fetchTariff());
+                    SERVICE.subscribe(fetchTariff());
                     System.out.println("Successful subscribed!");
-                } catch (NoUserException e) {
+                } catch (NoUserException | AlreadyHasTariffException e) {
                     e.printStackTrace();
                 }
                 break;
             case 7:
                 try {
-                    service.unsubscribe();
+                    SERVICE.unsubscribe();
                     System.out.println("Successful unsubscribed!");
                 } catch (NoUserException | NoTariffException e) {
                     e.printStackTrace();
                 }
                 break;
             case 8:
-                System.out.println(service.readUserFromFile());
+                System.out.println(SERVICE.readUserFromFile());
                 break;
             default:
                 System.out.println("There is no cases");
@@ -128,7 +130,7 @@ public class Menu {
 
     public static Tariff fetchTariff() {
         int choice = 0;
-        List<Tariff> tariffs = service.findAllTariffs();
+        List<Tariff> tariffs = SERVICE.findAllTariffs();
         while (true) {
             System.out.println("Enter 1, 2, 3, 4 or 5");
             for (int i = 0; i < tariffs.size(); i++) {
